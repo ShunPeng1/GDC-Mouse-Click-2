@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+namespace _Scripts.Manager
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ResourceManager : PersistentSingleton<ResourceManager>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("Prefabs")] 
+        public GameObject platformPrefab;
+    
     }
 }
