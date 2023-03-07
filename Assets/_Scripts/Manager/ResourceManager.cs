@@ -8,4 +8,6 @@ namespace _Scripts.Manager
         public GameObject platformPrefab;
     
     }
+    
+    
 }
