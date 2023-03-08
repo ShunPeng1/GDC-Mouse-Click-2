@@ -4,33 +4,23 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Vector3 vitriball;
-    private bool isDragging = false;
-    private Rigidbody2D _rb;
+    Vector3 InitialPos;
 
-    void Start()
+    private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        InitialPos = transform.position;
     }
 
-    void OnMouseDown()
+    private void OnMouseDrag()
     {
-        isDragging = true;
-        _rb.isKinematic = true;
-        vitriball = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector3(mousePos.x, mousePos.y, 0);
     }
 
-    void OnMouseDrag()
+    private void OnMouseUp()
     {
-        Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + vitriball;
-        transform.position = newPosition;
-    }
-
-    void OnMouseUp()
-    {
-        isDragging = false;
-        _rb.isKinematic = false;
-        Vector2 direction = (vitriball - (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition))) * 10f;
-        _rb.AddForce(direction, ForceMode2D.Impulse);
+        Vector3 vectorForce = InitialPos - transform.position;
+        GetComponent<Rigidbody2D>().AddForce(vectorForce * 300);
+        GetComponent<Rigidbody2D>().gravityScale = 1;
     }
 }
