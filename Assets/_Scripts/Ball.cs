@@ -6,12 +6,13 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     Vector3 InitialPos;
+    private Rigidbody2D rb;
+    public float push;
 
     private void Start()
     {
-        InitialPos = transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
-
     
     private void Update()
     {
@@ -26,8 +27,8 @@ public class Ball : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 vectorForce = mousePosition -  InitialPos;
             
-            GetComponent<Rigidbody2D>().AddForce(vectorForce * 300);
-            GetComponent<Rigidbody2D>().gravityScale = 1;
+            rb.AddForce(vectorForce.normalized * push);
+            rb.gravityScale = 1;
         }
     }
 }
