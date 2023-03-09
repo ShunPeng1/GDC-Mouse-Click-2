@@ -26,8 +26,7 @@ public class PlatformDestroyer : MonoBehaviour
         Debug.Log("Hit "+ other.gameObject.name );
         if (other.CompareTag($"Platform"))
         {
-            PlatformManager.Instance.CreateNewPlatform();
-            Destroy(other.gameObject);
+            PlatformManager.Instance.DestroyPlatform(other.gameObject);
         }
     }
 
