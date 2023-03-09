@@ -31,11 +31,13 @@ public class Ball : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             ExecutePush();
+            // GetComponent<LineRenderer>.enabled = false;
         }
         
         if (Input.GetMouseButtonDown(0))
         {
-            InitPush();   
+            InitPush();
+            // GetComponent<LineRenderer>.enabled = true;        
         }
     }
 
