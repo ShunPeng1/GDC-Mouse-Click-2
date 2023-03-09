@@ -7,7 +7,10 @@ public class Ball : MonoBehaviour
 {
     [Header("GameObject Properties")]
     private Rigidbody2D rb;
-
+    public AudioSource sound_menu;
+    public AudioSource sound_main;
+    public AudioSource sound_hit;
+    public AudioSource sound_death;
     
     [Header("Push Properties")]
     [SerializeField] private float pushForce;
@@ -21,6 +24,8 @@ public class Ball : MonoBehaviour
     
     private void Start()
     {
+        sound_menu.Play();
+        sound_menu.loop = true;
         rb = GetComponent<Rigidbody2D>();
         _currentPushEnergy = maxPushEnergy;
     }
@@ -84,3 +89,10 @@ public class Ball : MonoBehaviour
     }
     
 }
+/*
+khi mà bấm bắt đầu vào menu thì
+{
+    sound_menu.Stop();
+    sound_main.Play();
+}
+*/
