@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushForce: 1200
-  maxPushEnergy: 1
+  maxPushEnergy: 3
   collideCheckDuration: 0.3
   _currentPushEnergy: 0
 --- !u!212 &2058082913

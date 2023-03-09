@@ -46,6 +46,7 @@ public class Ball : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
         
+        rb.velocity = Vector2.zero;
         rb.AddForce(backwardDirection * pushForce);
 
         _isPushing = false;
@@ -75,6 +76,7 @@ public class Ball : MonoBehaviour
         _isColliding = true;
         _currentPushEnergy = maxPushEnergy;
         yield return new WaitForSeconds(collideCheckDuration);
+        
 
         _isColliding = false;
     }
