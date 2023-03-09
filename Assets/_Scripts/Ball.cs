@@ -9,12 +9,14 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb;
 
     
-    [Header("push Properties")]
+    [Header("Push Properties")]
     [SerializeField] private float pushForce;
     [SerializeField, Min(1)] private int maxPushEnergy = 1;
+    [SerializeField] private float collideCheckDuration = 0.3f;
     
     private Vector3 _initialPos;
     private bool _isPushing;
+    private bool _isColliding;
     [SerializeField]private int _currentPushEnergy;
     
     private void Start()
@@ -47,7 +49,7 @@ public class Ball : MonoBehaviour
         rb.AddForce(backwardDirection * pushForce);
 
         _isPushing = false;
-
+        _currentPushEnergy--;
     }
 
     private void InitPush()
@@ -56,16 +58,25 @@ public class Ball : MonoBehaviour
         _initialPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         _isPushing = true;
-        _currentPushEnergy--;
     }
 
     private void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Platform"))
         {
-            _currentPushEnergy = maxPushEnergy;
+            StartCoroutine(IgnoreCollisionShortly(col));
         }
     }
-    
+
+    private IEnumerator IgnoreCollisionShortly(Collision2D col)
+    {
+        if(_isColliding) yield break;
+
+        _isColliding = true;
+        _currentPushEnergy = maxPushEnergy;
+        yield return new WaitForSeconds(collideCheckDuration);
+
+        _isColliding = false;
+    }
     
 }
