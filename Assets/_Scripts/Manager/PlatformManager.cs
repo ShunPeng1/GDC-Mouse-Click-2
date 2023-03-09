@@ -48,7 +48,7 @@ namespace _Scripts.Manager
 
             foreach (var platform in platforms)
             {
-                StartCoroutine(CreateNewPlatform());
+                _currentNumberOfPlatform++;
             }
         }
         private void Update()
