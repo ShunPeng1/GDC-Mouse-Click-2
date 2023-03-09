@@ -34,7 +34,7 @@ namespace _Scripts.Manager
             Instantiate(ResourceManager.Instance.platformPrefab, new Vector3( 
                 position.x+ Random.Range(xSpawnRange.x, xSpawnRange.y), 
                 position.y+ Random.Range(ySpawnRange.x, ySpawnRange.y),
-                position.z) , Quaternion.identity, spawnerTransform);
+                position.z) , Quaternion.identity);
             
             
             yield return new WaitForSeconds(spawnCooldown);
