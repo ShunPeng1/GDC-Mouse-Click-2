@@ -12,7 +12,7 @@ namespace _Scripts.Manager
 
         [Header("Random Spawn Properties")] 
         [SerializeField] private int maxPlatform = 10;
-        [SerializeField, MinMaxSlider(-10,10)] private Vector2 xSpawnRange, ySpawnRange;
+        [SerializeField, MinMaxSlider(-30,30)] private Vector2 xSpawnRange, ySpawnRange;
         [SerializeField] private float spawnCooldown = 1f;
         
         private int _currentNumberOfPlatform = 0;
@@ -53,9 +53,10 @@ namespace _Scripts.Manager
         }
         private void Update()
         {
-            while (_currentNumberOfPlatform < maxPlatform)
+            if (_currentNumberOfPlatform < maxPlatform)
             {
-                CreateNewPlatform();
+                StartCoroutine(CreateNewPlatform());
+                
             }
         }
     }

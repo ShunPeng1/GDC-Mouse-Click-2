@@ -6,24 +6,11 @@ using UnityEngine;
 
 public class PlatformDestroyer : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    
-    private Rigidbody2D _rigidbody2D;
-    
-    void Start()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
 
-    private void FixedUpdate()
-    {
-        _rigidbody2D.velocity = Vector2.up * speed;
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
-        Debug.Log("Hit "+ other.gameObject.name );
+        //Debug.Log("Hit "+ other.gameObject.name );
         if (other.CompareTag($"Platform"))
         {
             PlatformManager.Instance.DestroyPlatform(other.gameObject);
