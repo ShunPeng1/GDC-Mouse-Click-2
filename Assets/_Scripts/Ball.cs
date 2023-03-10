@@ -24,6 +24,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float pushForce;
     [SerializeField, Min(1)] private int maxPushEnergy = 1;
     [SerializeField] private float collideCheckDuration = 0.3f;
+    [SerializeField] private Transform movingMap;
     
     private Vector3 _initialPos;
     private bool _isPushing;
@@ -56,7 +57,7 @@ public class Ball : MonoBehaviour
 
         if (_isPushing)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosition = Input.mousePosition;
             Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
             trajectory.SimulateTrajectory( transform.position,  backwardDirection* pushForce);
         }
@@ -66,7 +67,7 @@ public class Ball : MonoBehaviour
     {
         if (!_isPushing) return;
         
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Input.mousePosition;
         Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
         
         _rigidbody2D.velocity = Vector2.zero;
@@ -83,7 +84,7 @@ public class Ball : MonoBehaviour
     private void InitPush()
     {
         if (_currentPushEnergy <= 0) return;
-        _initialPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _initialPos = Input.mousePosition;
 
         _isPushing = true;
     }
