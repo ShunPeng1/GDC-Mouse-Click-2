@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     [Header("GameObject Properties")]
     private Rigidbody2D _rigidbody2D;
     private AudioSource _audioSource;
-    
+    private Animator _animator;
     
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
@@ -25,11 +25,14 @@ public class Ball : MonoBehaviour
     private bool _isPushing;
     private bool _isColliding;
     [SerializeField]private int _currentPushEnergy;
-    
+    private static readonly int IsFacingLeftNorRight = Animator.StringToHash("IsFacingLeftNorRight");
+    private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _currentPushEnergy = maxPushEnergy;
     }
     
@@ -55,6 +58,7 @@ public class Ball : MonoBehaviour
         
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
+        bool isFacingLeftNorRight = backwardDirection.x >= 0;
         
         _rigidbody2D.velocity = Vector2.zero;
         _rigidbody2D.AddForce(backwardDirection * pushForce);
@@ -63,6 +67,9 @@ public class Ball : MonoBehaviour
         _currentPushEnergy--;
         
         _audioSource.PlayOneShot(soundJump);
+        _animator.SetBool(IsJumping, true);
+        _animator.SetBool(IsFacingLeftNorRight, isFacingLeftNorRight);
+        
     }
 
     private void InitPush()
@@ -88,6 +95,7 @@ public class Ball : MonoBehaviour
         if (col.gameObject.CompareTag("Platform"))
         {
             StartCoroutine(IgnoreCollisionShortly(col));
+            _animator.SetBool(IsJumping, false);
             _audioSource.PlayOneShot(soundLanded);
         }
     }
