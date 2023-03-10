@@ -10,7 +10,7 @@ public class Trajectory : MonoBehaviour {
     [SerializeField] private Transform _obstaclesParent;
 
     private Scene _simulationScene;
-    private PhysicsScene _physicsScene;
+    private PhysicsScene2D _physicsScene;
     private readonly Dictionary<Transform, Transform> _spawnedObjects = new Dictionary<Transform, Transform>();
 
     private void Start() {
@@ -18,9 +18,9 @@ public class Trajectory : MonoBehaviour {
     }
 
     private void CreatePhysicsScene() {
-        _simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics3D));
-        _physicsScene = _simulationScene.GetPhysicsScene();
-
+        _simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+        _physicsScene = _simulationScene.GetPhysicsScene2D();
+        
         foreach (Transform obj in _obstaclesParent) {
             var ghostObj = Instantiate(obj.gameObject, obj.position, obj.rotation);
             SpriteRenderer spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();

@@ -2698,9 +2698,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1367655597}
     - target: {fileID: 4103347631612799713, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103347631612799713, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1990312119
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103347631612799713, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 76b30e5f53cf4864b9fe90f62b035d3a, type: 2}
+    - target: {fileID: 4103347631612799713, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 211
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103347631612799713, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4103347631612799713, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
       value: 0.0074920654
