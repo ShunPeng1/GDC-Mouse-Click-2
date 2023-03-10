@@ -13,8 +13,8 @@ public class Ball : MonoBehaviour
     
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
-    [SerializeField] AudioClip soundHit;
-    [SerializeField] AudioClip soundLanded;
+    [SerializeField] AudioClip soundHitOnRock;
+    [SerializeField] AudioClip soundLandedOnGrass;
     [SerializeField] AudioClip soundDeath;
     
     [Header("Push Properties")]
@@ -80,12 +80,22 @@ public class Ball : MonoBehaviour
         _isPushing = true;
     }
 
-    private void OnCollisionStay2D(Collision2D col)
+    private IEnumerator OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Platform"))
         {
-            StartCoroutine(IgnoreCollisionShortly(col));
-            
+            if(_isColliding) yield break;
+            _isColliding = true;
+        
+            // The player collide exactly above the platform
+            if (col.transform.position.y < transform.position.y)
+            {
+                _currentPushEnergy = maxPushEnergy;
+            }
+
+            yield return new WaitForSeconds(collideCheckDuration);
+        
+            _isColliding = false;
         }
     }
     
@@ -94,8 +104,17 @@ public class Ball : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Platform"))
         {
-            StartCoroutine(IgnoreCollisionShortly(col));
-            _audioSource.PlayOneShot(soundLanded);
+            // The player collide exactly above the platform
+            if (col.transform.position.y < transform.position.y)
+            {
+                _currentPushEnergy = maxPushEnergy;
+                _audioSource.PlayOneShot(soundLandedOnGrass);
+            }
+            else
+            {
+                _audioSource.PlayOneShot(soundHitOnRock);
+            }
+            
         }
     }
 
@@ -104,18 +123,21 @@ public class Ball : MonoBehaviour
         if(_isColliding) yield break;
 
         _isColliding = true;
-        _currentPushEnergy = maxPushEnergy;
+        
+        // The player collide exactly above the platform
+        if (col.transform.position.y < transform.position.y)
+        {
+            _currentPushEnergy = maxPushEnergy;
+            _audioSource.PlayOneShot(soundLandedOnGrass);
+        }
+        else
+        {
+            _audioSource.PlayOneShot(soundHitOnRock);
+        }
+
         yield return new WaitForSeconds(collideCheckDuration);
         
-
         _isColliding = false;
     }
     
 }
-/*
-khi mà bấm bắt đầu vào menu thì
-{
-    sound_menu.Stop();
-    sound_main.Play();
-}
-*/
