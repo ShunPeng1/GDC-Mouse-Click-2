@@ -12,15 +12,11 @@ public class TrajectoryGhostObject : MonoBehaviour
     [SerializeField] private AudioClip[] _clips;
     [SerializeField] private GameObject _poofPrefab;
     private bool _isGhost;
-
-    private void Start()
-    {
-    }
-
+    
     public void Init(Vector3 velocity, bool isGhost) {
         _isGhost = isGhost;
         _rb = GetComponent<Rigidbody2D>();
-        _rb.AddForce(velocity, ForceMode2D.Impulse);
+        _rb.AddForce(velocity, ForceMode2D.Force);
     }
 
     public void OnCollisionEnter(Collision col) {

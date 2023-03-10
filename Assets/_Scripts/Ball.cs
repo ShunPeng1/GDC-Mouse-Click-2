@@ -47,20 +47,18 @@ public class Ball : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             ExecutePush();
-            // GetComponent<LineRenderer>.enabled = false;
         }
         
         if (Input.GetMouseButtonDown(0))
         {
             InitPush();
-            // GetComponent<LineRenderer>.enabled = true;        
         }
 
         if (_isPushing)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 forwardDirection =  (-_initialPos + mousePosition).normalized;
-            trajectory.SimulateTrajectory( transform.position,  forwardDirection* pushForce);
+            Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
+            trajectory.SimulateTrajectory( transform.position,  backwardDirection* pushForce);
         }
     }
 
@@ -72,7 +70,7 @@ public class Ball : MonoBehaviour
         Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
         
         _rigidbody2D.velocity = Vector2.zero;
-        _rigidbody2D.AddForce(backwardDirection * pushForce);
+        _rigidbody2D.AddForce(backwardDirection * pushForce, ForceMode2D.Force );
 
         _isPushing = false;
         _currentPushEnergy--;

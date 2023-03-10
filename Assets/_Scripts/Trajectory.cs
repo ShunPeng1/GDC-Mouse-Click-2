@@ -46,8 +46,8 @@ public class Trajectory : MonoBehaviour {
         _line.positionCount = _maxPhysicsFrameIterations;
 
         for (var i = 0; i < _maxPhysicsFrameIterations; i++) {
-            _physicsScene.Simulate(Time.fixedDeltaTime);
             _line.SetPosition(i, ghostObj.transform.position);
+            _physicsScene.Simulate(Time.fixedDeltaTime);
         }
 
         Destroy(ghostObj.gameObject);

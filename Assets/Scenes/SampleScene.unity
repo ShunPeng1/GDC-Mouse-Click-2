@@ -2685,6 +2685,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4103347631612799704, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4103347631612799706, guid: a9bb87f15d1d77740aeeb4820a99b50a, type: 3}
       propertyPath: m_Name
       value: Player
