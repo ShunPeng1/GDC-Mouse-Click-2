@@ -15,11 +15,11 @@ public class TrajectoryGhostObject : MonoBehaviour
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
     }
 
     public void Init(Vector3 velocity, bool isGhost) {
         _isGhost = isGhost;
+        _rb = GetComponent<Rigidbody2D>();
         _rb.AddForce(velocity, ForceMode2D.Impulse);
     }
 

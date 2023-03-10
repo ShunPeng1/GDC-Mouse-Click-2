@@ -9,7 +9,8 @@ namespace _Scripts.Manager
     public class PlatformManager : Singleton<PlatformManager>
     {
         [SerializeField] private Transform spawnerTransform;
-
+        [SerializeField] private Transform platformParents;
+        
         [Header("Random Spawn Properties")] 
         [SerializeField] private int maxPlatform = 10;
         [SerializeField, MinMaxSlider(-30,30)] private Vector2 xSpawnRange, ySpawnRange;
@@ -34,7 +35,7 @@ namespace _Scripts.Manager
             Instantiate(ResourceManager.Instance.platformPrefab, new Vector3( 
                 position.x+ Random.Range(xSpawnRange.x, xSpawnRange.y), 
                 position.y+ Random.Range(ySpawnRange.x, ySpawnRange.y),
-                position.z) , Quaternion.identity);
+                position.z) , Quaternion.identity, platformParents);
             
             
             yield return new WaitForSeconds(spawnCooldown);

@@ -23,7 +23,8 @@ public class Trajectory : MonoBehaviour {
 
         foreach (Transform obj in _obstaclesParent) {
             var ghostObj = Instantiate(obj.gameObject, obj.position, obj.rotation);
-            ghostObj.GetComponent<Renderer>().enabled = false;
+            SpriteRenderer spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null) spriteRenderer.enabled = false;
             SceneManager.MoveGameObjectToScene(ghostObj, _simulationScene);
             if (!ghostObj.isStatic) _spawnedObjects.Add(obj, ghostObj.transform);
         }
