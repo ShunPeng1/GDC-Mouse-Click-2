@@ -6,11 +6,15 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [Header("GameObject Properties")]
-    private Rigidbody2D rb;
-    public AudioSource sound_menu;
-    public AudioSource sound_main;
-    public AudioSource sound_hit;
-    public AudioSource sound_death;
+    private Rigidbody2D _rigidbody2D;
+    private AudioSource _audioSource;
+    
+    
+    [Header("Audio Clips")]
+    [SerializeField] AudioClip soundJump;
+    [SerializeField] AudioClip soundHit;
+    [SerializeField] AudioClip soundLanded;
+    [SerializeField] AudioClip soundDeath;
     
     [Header("Push Properties")]
     [SerializeField] private float pushForce;
@@ -24,9 +28,8 @@ public class Ball : MonoBehaviour
     
     private void Start()
     {
-        sound_menu.Play();
-        sound_menu.loop = true;
-        rb = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _currentPushEnergy = maxPushEnergy;
     }
     
@@ -53,11 +56,13 @@ public class Ball : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
         
-        rb.velocity = Vector2.zero;
-        rb.AddForce(backwardDirection * pushForce);
+        _rigidbody2D.velocity = Vector2.zero;
+        _rigidbody2D.AddForce(backwardDirection * pushForce);
 
         _isPushing = false;
         _currentPushEnergy--;
+        
+        _audioSource.PlayOneShot(soundJump);
     }
 
     private void InitPush()
@@ -73,6 +78,17 @@ public class Ball : MonoBehaviour
         if (col.gameObject.CompareTag("Platform"))
         {
             StartCoroutine(IgnoreCollisionShortly(col));
+            
+        }
+    }
+    
+    
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Platform"))
+        {
+            StartCoroutine(IgnoreCollisionShortly(col));
+            _audioSource.PlayOneShot(soundLanded);
         }
     }
 
