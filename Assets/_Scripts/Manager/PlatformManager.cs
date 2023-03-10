@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using GD.MinMaxSlider;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace _Scripts.Manager
@@ -19,9 +21,17 @@ namespace _Scripts.Manager
         private int _currentNumberOfPlatform = 0;
         private bool _isSpawning = false;
 
+        [Header("Simulate Scene")]
+        private Scene _simulationScene;
+        private PhysicsScene2D _physicsScene;
+        private readonly Dictionary<int, GameObject> _spawnedGhostObjects = new();
+
+
         public void DestroyPlatform(GameObject platform)
         {
             _currentNumberOfPlatform--;
+            Destroy(_spawnedGhostObjects[platform.GetInstanceID()]);
+            _spawnedGhostObjects.Remove(platform.GetInstanceID());
             Destroy(platform);
         }
         public IEnumerator CreateNewPlatform()
@@ -32,26 +42,63 @@ namespace _Scripts.Manager
             _currentNumberOfPlatform++;
 
             var position = spawnerTransform.position;
-            Instantiate(ResourceManager.Instance.platformPrefab, new Vector3( 
+            GameObject obj = Instantiate(ResourceManager.Instance.platformPrefab, new Vector3( 
                 position.x+ Random.Range(xSpawnRange.x, xSpawnRange.y), 
                 position.y+ Random.Range(ySpawnRange.x, ySpawnRange.y),
                 position.z) , Quaternion.identity, platformParents);
             
+            CreateGhostPlatform(obj);
             
             yield return new WaitForSeconds(spawnCooldown);
 
             _isSpawning = false;
         }
 
+        private void CreateGhostPlatform(GameObject obj)
+        {
+            Transform objTransform = obj.transform;
+            GameObject ghostObj = Instantiate(obj.gameObject, objTransform.position, objTransform.rotation);
+
+            SpriteRenderer spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null) spriteRenderer.enabled = false;
+            
+            SceneManager.MoveGameObjectToScene(ghostObj, _simulationScene);
+            if (!ghostObj.isStatic) _spawnedGhostObjects.Add(obj.GetInstanceID(), ghostObj);
+        }
+        
+        public void Simulate()
+        {
+            _physicsScene.Simulate(Time.fixedDeltaTime );
+        }
+
+        public Scene GetSimulationScene()
+        {
+            return _simulationScene;
+        }
+        
         private void Start()
         {
+            CreatePhysicsScene();   
+        }
+        
+        private void CreatePhysicsScene() {
             Platform [] platforms = FindObjectsOfType<Platform>();
 
             foreach (var platform in platforms)
             {
                 _currentNumberOfPlatform++;
             }
+            
+            _simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+            _physicsScene = _simulationScene.GetPhysicsScene2D();
+        
+            foreach (Platform obj in platforms)
+            {
+                CreateGhostPlatform(obj.gameObject);
+            }
         }
+
+        
         private void Update()
         {
             if (_currentNumberOfPlatform < maxPlatform)

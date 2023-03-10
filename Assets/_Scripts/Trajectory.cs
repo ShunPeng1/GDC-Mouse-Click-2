@@ -5,49 +5,32 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(LineRenderer)) ]
 public class Trajectory : MonoBehaviour {
-    [SerializeField] private LineRenderer _line;
+    
+    private LineRenderer _lineRenderer;
     [SerializeField] private int _maxPhysicsFrameIterations = 100;
     [SerializeField] private Transform _obstaclesParent;
-
-    private Scene _simulationScene;
-    private PhysicsScene2D _physicsScene;
-    private readonly Dictionary<Transform, Transform> _spawnedObjects = new Dictionary<Transform, Transform>();
-
-    private void Start() {
-        CreatePhysicsScene();
+    
+    private void Start()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
-    private void CreatePhysicsScene() {
-        _simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
-        _physicsScene = _simulationScene.GetPhysicsScene2D();
-        
-        foreach (Transform obj in _obstaclesParent) {
-            var ghostObj = Instantiate(obj.gameObject, obj.position, obj.rotation);
-            SpriteRenderer spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null) spriteRenderer.enabled = false;
-            SceneManager.MoveGameObjectToScene(ghostObj, _simulationScene);
-            if (!ghostObj.isStatic) _spawnedObjects.Add(obj, ghostObj.transform);
-        }
-    }
-
+    
     private void Update() {
-        foreach (var item in _spawnedObjects) {
-            item.Value.position = item.Key.position;
-            item.Value.rotation = item.Key.rotation;
-        }
+        
     }
 
     public void SimulateTrajectory(Vector3 pos, Vector3 velocity) {
         var ghostObj = Instantiate(ResourceManager.Instance.ghostTrajectoryGameObject, pos, Quaternion.identity);
-        SceneManager.MoveGameObjectToScene(ghostObj.gameObject, _simulationScene);
+        SceneManager.MoveGameObjectToScene(ghostObj.gameObject, PlatformManager.Instance.GetSimulationScene());
         
         ghostObj.GetComponent<TrajectoryGhostObject>().Init(velocity, true);
 
-        _line.positionCount = _maxPhysicsFrameIterations;
+        _lineRenderer.positionCount = _maxPhysicsFrameIterations;
 
         for (var i = 0; i < _maxPhysicsFrameIterations; i++) {
-            _line.SetPosition(i, ghostObj.transform.position);
-            _physicsScene.Simulate(Time.fixedDeltaTime);
+            _lineRenderer.SetPosition(i, ghostObj.transform.position);
+            PlatformManager.Instance.Simulate();
         }
 
         Destroy(ghostObj.gameObject);
