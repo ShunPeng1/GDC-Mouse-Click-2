@@ -289,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a33b177e2eb5534cb6342004903a884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _line: {fileID: 4103347631612799713}
   _maxPhysicsFrameIterations: 100
   _obstaclesParent: {fileID: 0}
 --- !u!120 &4103347631612799713
@@ -333,9 +332,7 @@ LineRenderer:
   m_SortingLayerID: 1990312119
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 10, y: 0, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
