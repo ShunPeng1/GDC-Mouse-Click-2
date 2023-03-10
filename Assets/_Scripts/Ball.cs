@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private AudioSource _audioSource;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
     
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
@@ -33,6 +34,7 @@ public class Ball : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _currentPushEnergy = maxPushEnergy;
     }
     
@@ -58,7 +60,6 @@ public class Ball : MonoBehaviour
         
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
-        bool isFacingLeftNorRight = backwardDirection.x >= 0;
         
         _rigidbody2D.velocity = Vector2.zero;
         _rigidbody2D.AddForce(backwardDirection * pushForce);
@@ -67,9 +68,8 @@ public class Ball : MonoBehaviour
         _currentPushEnergy--;
         
         _audioSource.PlayOneShot(soundJump);
-        _animator.SetBool(IsJumping, true);
-        _animator.SetBool(IsFacingLeftNorRight, isFacingLeftNorRight);
-        
+        _animator.SetTrigger(IsJumping);
+        _spriteRenderer.flipX = backwardDirection.x < 0;
     }
 
     private void InitPush()
@@ -95,7 +95,6 @@ public class Ball : MonoBehaviour
         if (col.gameObject.CompareTag("Platform"))
         {
             StartCoroutine(IgnoreCollisionShortly(col));
-            _animator.SetBool(IsJumping, false);
             _audioSource.PlayOneShot(soundLanded);
         }
     }
