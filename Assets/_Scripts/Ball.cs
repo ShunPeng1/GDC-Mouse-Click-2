@@ -10,6 +10,9 @@ public class Ball : MonoBehaviour
     private AudioSource _audioSource;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Trajectory trajectory;
+    [SerializeField] private ParticleSystem launchParticles;
+    
     
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
@@ -51,6 +54,13 @@ public class Ball : MonoBehaviour
         {
             InitPush();
             // GetComponent<LineRenderer>.enabled = true;        
+        }
+
+        if (_isPushing)
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
+            trajectory.SimulateTrajectory( transform.position,  backwardDirection* pushForce);
         }
     }
 

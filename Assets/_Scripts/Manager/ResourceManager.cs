@@ -6,7 +6,8 @@ namespace _Scripts.Manager
     {
         [Header("Prefabs")] 
         public GameObject platformPrefab;
-    
+
+        public GameObject ghostTrajectoryGameObject;
     }
     
     
