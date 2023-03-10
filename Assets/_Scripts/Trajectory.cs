@@ -3,6 +3,7 @@ using _Scripts.Manager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(LineRenderer)) ]
 public class Trajectory : MonoBehaviour {
     [SerializeField] private LineRenderer _line;
     [SerializeField] private int _maxPhysicsFrameIterations = 100;
