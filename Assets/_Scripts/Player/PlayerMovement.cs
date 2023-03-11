@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("GameObject Properties")]
     private Rigidbody2D _rigidbody2D;
-    private AudioSource _audioSource;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Trajectory trajectory;
@@ -33,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -115,13 +113,13 @@ public class PlayerMovement : MonoBehaviour
             if (col.transform.position.y < transform.position.y)
             {
                 _currentPushEnergy = maxPushEnergy;
-                _audioSource.PlayOneShot(soundLandedOnGrass);
+                
+                SoundManager.Instance.PlaySoundEffect(soundLandedOnGrass);
             }
             else
             {
-                _audioSource.PlayOneShot(soundHitOnRock);
+                SoundManager.Instance.PlaySoundEffect(soundHitOnRock);
             }
-            
         }
     }
 
@@ -135,11 +133,11 @@ public class PlayerMovement : MonoBehaviour
         if (col.transform.position.y < transform.position.y)
         {
             _currentPushEnergy = maxPushEnergy;
-            _audioSource.PlayOneShot(soundLandedOnGrass);
+            SoundManager.Instance.PlaySoundEffect(soundLandedOnGrass);
         }
         else
         {
-            _audioSource.PlayOneShot(soundHitOnRock);
+            SoundManager.Instance.PlaySoundEffect(soundHitOnRock);
         }
 
         yield return new WaitForSeconds(collideCheckDuration);

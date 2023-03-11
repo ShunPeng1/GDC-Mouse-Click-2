@@ -13,12 +13,10 @@ public class GameManager : PersistentSingleton<GameManager>
         GameOver,
     }
 
-    private GameState _gameState;
-
     protected override void Awake()
     {
         base.Awake();
-        _gameState = GameState.GameInitial;
+        ChangeGameState(GameState.GameInitial);
     }
 
     public void ChangeGameState(GameState changeGameState)
@@ -31,6 +29,7 @@ public class GameManager : PersistentSingleton<GameManager>
             case GameState.GamePlaying:
                 break;
             case GameState.GameOver:
+                OnGameOver();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(changeGameState), changeGameState, null);
@@ -38,21 +37,19 @@ public class GameManager : PersistentSingleton<GameManager>
     }
     private void OnGameInitial()
     {
-        
+        Time.timeScale = 1;
     }
 
-    private void OnGameOver()
-    {
-        SoundManager.Instance.OnGameOver();
-    }
-
+    
     private void OnGamePlaying()
     {
         
     }
     
-    public virtual void GameOver()
+    public void OnGameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 0;
+        SoundManager.Instance.OnGameOver();
+        UIManager.Instance.OnGameOver();
     }
 }

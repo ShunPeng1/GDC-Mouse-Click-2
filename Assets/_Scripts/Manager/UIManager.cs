@@ -5,11 +5,19 @@ using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
-    public TextMeshProUGUI text;
-    int score;
-  
-    public void ChangeScore(int carrotValue)
+    public TextMeshProUGUI carrotScore;
+    
+    public GameObject mainPanel, gameOverPanel;
+    
+    
+    public void OnGameOver()
     {
-        text.text = "X" + carrotValue.ToString();
+        mainPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+    }
+
+    public void UpdateCarrotScore(int score)
+    {
+        carrotScore.text = score.ToString();
     }
 }

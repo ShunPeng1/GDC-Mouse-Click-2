@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlatformDestroyer : MonoBehaviour
 {
-    public GameObject panel, button, text;
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Hit "+ other.gameObject.name );
@@ -20,12 +19,9 @@ public class PlatformDestroyer : MonoBehaviour
             other.GetComponent<Collectible>().DestroyCollectible();
         }
 
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag($"Player"))
         {
-            Time.timeScale = 0;
-            panel.SetActive(true);
-            button.SetActive(true);
-            text.SetActive(true);
+            GameManager.Instance.ChangeGameState(GameManager.GameState.GameOver);
         }
     }
     

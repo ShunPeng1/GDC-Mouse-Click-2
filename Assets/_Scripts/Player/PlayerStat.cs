@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
-    [SerializeField] private int point;
-    [SerializeField] private int life;
+    [SerializeField] private int carrotScore;
+    [SerializeField] private int lifeScore;
 
 
     public void AddPoint(int adding)
     {
-        point += adding;
-        UIManager.Instance.ChangeScore(point);
+        carrotScore += adding;
+        UIManager.Instance.UpdateCarrotScore(carrotScore);
     }
 
     public void AddLife(int adding)
     {
-        life += adding;
+        lifeScore += adding;
     }
 }
