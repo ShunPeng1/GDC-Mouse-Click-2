@@ -182,7 +182,7 @@ MonoBehaviour:
   collectiblePosition: {fileID: 7989497601864771036}
   spawnableCollectiblesList:
   - collectibleType: 0
-    spawnChances: 20
+    spawnChances: 40
 --- !u!114 &6647153112830784159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,4 +209,4 @@ MonoBehaviour:
   - {x: 2.8911076, y: -0.90342045, z: 0}
   m_ShapePathHash: -812773778
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61128
+  m_InstanceId: 102092

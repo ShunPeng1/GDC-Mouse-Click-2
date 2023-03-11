@@ -6,6 +6,7 @@ using TMPro;
 public class UIManager : Singleton<UIManager>
 {
     public TextMeshProUGUI carrotScore;
+    public TextMeshProUGUI carrotScore2;
     
     public GameObject mainPanel, gameOverPanel;
     
@@ -18,6 +19,7 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateCarrotScore(int score)
     {
-        carrotScore.text = score.ToString();
+        carrotScore.text = "x"+ score.ToString();
+        carrotScore2.text = "x"+ score.ToString();
     }
 }
