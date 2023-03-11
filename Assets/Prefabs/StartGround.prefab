@@ -126,9 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectiblePosition: {fileID: 252309105378231823}
-  spawnableCollectiblesList:
-  - collectibleType: 0
-    spawnChances: 20
+  spawnableCollectiblesList: []
 --- !u!1 &1827685203115503202
 GameObject:
   m_ObjectHideFlags: 0

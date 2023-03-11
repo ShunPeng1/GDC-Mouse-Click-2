@@ -49,7 +49,8 @@ namespace _Scripts.Manager
                 position.z) , Quaternion.identity, platformParents);
             
             CreateGhostPlatform(obj);
-            
+            obj.GetComponent<Platform>().InitSpawnCollectible();
+
             yield return new WaitForSeconds(spawnCooldown);
 
             _isSpawning = false;
@@ -71,12 +72,7 @@ namespace _Scripts.Manager
         {
             _physicsScene.Simulate(Time.fixedDeltaTime );
         }
-
-        public Scene GetSimulationScene()
-        {
-            return _simulationScene;
-        }
-
+        
         public void MoveObjectToSimulateScene(GameObject moveObject)
         {
             UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(moveObject, _simulationScene);   
@@ -89,18 +85,15 @@ namespace _Scripts.Manager
         
         private void CreatePhysicsScene() {
             Platform [] platforms = FindObjectsOfType<Platform>();
+            _currentNumberOfPlatform+= platforms.Length;
 
-            foreach (var platform in platforms)
-            {
-                _currentNumberOfPlatform++;
-            }
-            
             _simulationScene = UnityEngine.SceneManagement.SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
             _physicsScene = _simulationScene.GetPhysicsScene2D();
         
             foreach (Platform obj in platforms)
             {
                 CreateGhostPlatform(obj.gameObject);
+                obj.InitSpawnCollectible();
             }
         }
 

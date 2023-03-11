@@ -9,30 +9,31 @@ public class Platform : MonoBehaviour
 {
     [SerializeField] private Transform collectiblePosition;
     [SerializeField] private List<SpawnableCollectibles> spawnableCollectiblesList;
-    
-    
-    
+
     [Serializable]
     public class SpawnableCollectibles
     {
         public CollectibleType collectibleType;
-        [Range(0,100)] public float spawnChances;
+        [Range(0,100)] public int spawnChances;
     }
 
-    private void Start()
+    public void InitSpawnCollectible()
     {
-        float totalChance = 0f;
+        int totalChance = 0;
         foreach (var collectible in spawnableCollectiblesList)
         {
             totalChance += collectible.spawnChances;
         }
 
-        float itemAtChances = Random.Range(0, 100);
-        float currentChances=0f;
+        totalChance = Mathf.Max(100, totalChance);
+        
+        int itemAtChances = Random.Range(0, 100);
+        int currentChances = 0;
         
         foreach (var collectible in spawnableCollectiblesList)
         {
-            currentChances += collectible.spawnChances / totalChance;
+            currentChances +=  (int) (100f * (float)collectible.spawnChances / (float)totalChance);
+            Debug.Log(currentChances + " <= "+ itemAtChances);
             if (currentChances >= itemAtChances)
             {
                 SpawnCollectible(collectible.collectibleType);
@@ -47,10 +48,10 @@ public class Platform : MonoBehaviour
         switch (collectibleType)
         {
             case CollectibleType.Carrot:
-                Instantiate(ResourceManager.Instance.carrotPrefab, transform);
+                Instantiate(ResourceManager.Instance.carrotPrefab, collectiblePosition.transform);
                 break;
             case CollectibleType.Health:
-                Instantiate(ResourceManager.Instance.carrotPrefab, transform);
+                Instantiate(ResourceManager.Instance.carrotPrefab,  collectiblePosition.transform);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null);
