@@ -6,24 +6,20 @@ using UnityEngine.Events;
 
 public class Collectible : MonoBehaviour
 {
-    [SerializeField] private UnityEvent onCollect;
-    
-    
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player")
+        if (col.CompareTag("Player"))
         {
-            onCollect.Invoke();
-            CollectAnimation();
+            OnCollect();
         } 
     }
 
-    public virtual void CollectAnimation()
+    public virtual void OnCollect()
     {
         Destroy(gameObject);
     }
 
-    public virtual void DestroyAnimation()
+    public virtual void DnRemove()
     {
         Destroy(gameObject);    
     }
