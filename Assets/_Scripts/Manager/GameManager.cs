@@ -14,9 +14,10 @@ public class GameManager : PersistentSingleton<GameManager>
     }
 
     private GameState _gameState;
-    
-    private void Start()
+
+    protected override void Awake()
     {
+        base.Awake();
         _gameState = GameState.GameInitial;
     }
 
