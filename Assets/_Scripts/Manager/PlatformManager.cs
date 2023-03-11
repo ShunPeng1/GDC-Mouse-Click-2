@@ -65,7 +65,7 @@ namespace _Scripts.Manager
             if (spriteRenderer != null) spriteRenderer.enabled = false;
 
             MoveObjectToSimulateScene(ghostObj);
-            if (!ghostObj.isStatic) _spawnedGhostObjects.Add(obj.GetInstanceID(), ghostObj);
+            _spawnedGhostObjects.Add(obj.GetInstanceID(), ghostObj);
         }
         
         public void Simulate()
@@ -75,7 +75,7 @@ namespace _Scripts.Manager
         
         public void MoveObjectToSimulateScene(GameObject moveObject)
         {
-            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(moveObject, _simulationScene);   
+            SceneManager.MoveGameObjectToScene(moveObject, _simulationScene);   
         }
         
         private void Start()
@@ -87,7 +87,7 @@ namespace _Scripts.Manager
             Platform [] platforms = FindObjectsOfType<Platform>();
             _currentNumberOfPlatform+= platforms.Length;
 
-            _simulationScene = UnityEngine.SceneManagement.SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+            _simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
             _physicsScene = _simulationScene.GetPhysicsScene2D();
         
             foreach (Platform obj in platforms)
@@ -95,6 +95,7 @@ namespace _Scripts.Manager
                 CreateGhostPlatform(obj.gameObject);
                 obj.InitSpawnCollectible();
             }
+            
         }
 
         
