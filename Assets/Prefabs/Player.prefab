@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48110078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.58, z: 0}
+  m_LocalPosition: {x: 0, y: -0.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,9 +167,10 @@ GameObject:
   - component: {fileID: 4103347631612799719}
   - component: {fileID: 4103347631612799716}
   - component: {fileID: 4103347631612799715}
+  - component: {fileID: 876322760}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,7 +310,7 @@ MonoBehaviour:
   soundDeath: {fileID: 0}
   pushForce: 1200
   maxPushEnergy: 3
-  collideCheckDuration: 0.5
+  collideCheckDuration: 1
   _currentPushEnergy: 0
 --- !u!95 &4103347631612799716
 Animator:
@@ -427,3 +428,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &876322760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4103347631612799706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5bfafc2327b7749ae7901cfa66cfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  point: 0
+  life: 0

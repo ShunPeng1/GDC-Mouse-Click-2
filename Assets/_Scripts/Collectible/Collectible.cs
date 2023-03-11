@@ -11,13 +11,14 @@ public abstract class Collectible : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            Debug.Log("Collect");
             OnCollect(col.gameObject);
         } 
     }
 
     public abstract void OnCollect(GameObject player);
 
-    public void Destroy()
+    public void DestroyCollectible()
     {
         Destroy(gameObject);
     }

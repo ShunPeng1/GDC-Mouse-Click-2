@@ -10,12 +10,9 @@ public class CarrotCollectible : Collectible
     [SerializeField] private AudioClip collectSoundEffect;
     public override void OnCollect(GameObject player)
     {
-        GetComponent<PlayerStat>().AddPoint(point);
+        player.GetComponent<PlayerStat>().AddPoint(point);
+        SoundManager.Instance.PlaySoundEffect(collectSoundEffect);
         Destroy(gameObject);
     }
     
-    public void Destroy()
-    {
-        Destroy(gameObject);
-    }
 }
