@@ -16,7 +16,7 @@ public class PlatformDestroyer : MonoBehaviour
 
         if (other.CompareTag($"Collectible"))
         {
-            other.GetComponent<Collectible>().OnCollect();
+            other.GetComponent<Collectible>().Destroy();
         }
     }
     

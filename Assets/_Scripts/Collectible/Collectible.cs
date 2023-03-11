@@ -4,24 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Collectible : MonoBehaviour
+[RequireComponent(typeof(Collider))]
+public abstract class Collectible : MonoBehaviour
 {
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            OnCollect();
+            OnCollect(col.gameObject);
         } 
     }
 
-    public virtual void OnCollect()
+    public abstract void OnCollect(GameObject player);
+
+    public void Destroy()
     {
         Destroy(gameObject);
     }
 
-    public virtual void DnRemove()
-    {
-        Destroy(gameObject);    
-    }
-    
 }
