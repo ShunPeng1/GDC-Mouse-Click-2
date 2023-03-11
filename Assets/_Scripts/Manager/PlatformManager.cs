@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+
 namespace _Scripts.Manager
 {
     public class PlatformManager : Singleton<PlatformManager>
@@ -26,7 +27,7 @@ namespace _Scripts.Manager
         private PhysicsScene2D _physicsScene;
         private readonly Dictionary<int, GameObject> _spawnedGhostObjects = new();
 
-
+        
         public void DestroyPlatform(GameObject platform)
         {
             _currentNumberOfPlatform--;
@@ -61,8 +62,8 @@ namespace _Scripts.Manager
 
             SpriteRenderer spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null) spriteRenderer.enabled = false;
-            
-            SceneManager.MoveGameObjectToScene(ghostObj, _simulationScene);
+
+            MoveObjectToSimulateScene(ghostObj);
             if (!ghostObj.isStatic) _spawnedGhostObjects.Add(obj.GetInstanceID(), ghostObj);
         }
         
@@ -74,6 +75,11 @@ namespace _Scripts.Manager
         public Scene GetSimulationScene()
         {
             return _simulationScene;
+        }
+
+        public void MoveObjectToSimulateScene(GameObject moveObject)
+        {
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(moveObject, _simulationScene);   
         }
         
         private void Start()
@@ -89,7 +95,7 @@ namespace _Scripts.Manager
                 _currentNumberOfPlatform++;
             }
             
-            _simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+            _simulationScene = UnityEngine.SceneManagement.SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
             _physicsScene = _simulationScene.GetPhysicsScene2D();
         
             foreach (Platform obj in platforms)
@@ -104,7 +110,6 @@ namespace _Scripts.Manager
             if (_currentNumberOfPlatform < maxPlatform)
             {
                 StartCoroutine(CreateNewPlatform());
-                
             }
         }
     }

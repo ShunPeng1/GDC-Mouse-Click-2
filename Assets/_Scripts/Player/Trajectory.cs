@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using _Scripts.Manager;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 [RequireComponent(typeof(LineRenderer)) ]
 public class Trajectory : MonoBehaviour {
@@ -22,7 +22,7 @@ public class Trajectory : MonoBehaviour {
 
     public void SimulateTrajectory(Vector3 pos, Vector3 velocity) {
         var ghostObj = Instantiate(ResourceManager.Instance.ghostTrajectoryGameObject, pos, Quaternion.identity);
-        SceneManager.MoveGameObjectToScene(ghostObj.gameObject, PlatformManager.Instance.GetSimulationScene());
+        PlatformManager.Instance.MoveObjectToSimulateScene(ghostObj);
         
         ghostObj.GetComponent<TrajectoryGhostObject>().Init(velocity);
 

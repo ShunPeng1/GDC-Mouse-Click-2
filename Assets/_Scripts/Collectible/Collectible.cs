@@ -8,11 +8,14 @@ public class Collectible : MonoBehaviour
 {
     [SerializeField] private UnityEvent onCollect;
     
-
+    
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        onCollect.Invoke();
-        CollectAnimation();    
+        if (col.tag == "Player")
+        {
+            onCollect.Invoke();
+            CollectAnimation();
+        } 
     }
 
     public virtual void CollectAnimation()

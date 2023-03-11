@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityUtilities;
 
-public class SceneManager : SingletonMonoBehaviour<SceneManager>
+
+public class SceneManager : Singleton<SceneManager>
 {
-    
-    
     public void RestartScene(){
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
