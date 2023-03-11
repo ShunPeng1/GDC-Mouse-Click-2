@@ -33,7 +33,7 @@ public class Platform : MonoBehaviour
         foreach (var collectible in spawnableCollectiblesList)
         {
             currentChances +=  (int) (100f * (float)collectible.spawnChances / (float)totalChance);
-            Debug.Log(currentChances + " <= "+ itemAtChances);
+            //Debug.Log(currentChances + " <= "+ itemAtChances);
             if (currentChances >= itemAtChances)
             {
                 SpawnCollectible(collectible.collectibleType);

@@ -17,7 +17,7 @@ public abstract class Collectible : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            Debug.Log("Collect");
+            //Debug.Log("Collect");
             OnCollect(col.gameObject);
         } 
     }

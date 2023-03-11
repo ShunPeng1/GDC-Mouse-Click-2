@@ -11,6 +11,7 @@ public class PlayerStat : MonoBehaviour
     public void AddPoint(int adding)
     {
         point += adding;
+        UIManager.Instance.ChangeScore(point);
     }
 
     public void AddLife(int adding)
