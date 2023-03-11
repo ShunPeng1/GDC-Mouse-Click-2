@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum CollectibleType
+{
+    Carrot,
+    Health
+}
+
 [RequireComponent(typeof(Collider2D))]
 public abstract class Collectible : MonoBehaviour
 {

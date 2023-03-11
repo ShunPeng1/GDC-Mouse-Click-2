@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &243486962040533710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7989497601864771036}
+  m_Layer: 0
+  m_Name: Collectible Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7989497601864771036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243486962040533710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7111558124503653255}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7111558124503653258
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,9 +61,10 @@ Transform:
   m_GameObject: {fileID: 7111558124503653258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7989497601864771036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,18 +133,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010922015, y: 0.036597297}
+  m_Offset: {x: 0.009241104, y: -0.11462462}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.63, y: 0.82}
+    oldSize: {x: 8.766666, y: 2.7333333}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5003805, y: 0.46703246}
+  m_Size: {x: 7.9846916, y: 1.5759926}
   m_EdgeRadius: 0
 --- !u!50 &1522458157146404607
 Rigidbody2D:
@@ -147,6 +179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f241cba724af04ab17d92452e4636f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectiblePosition: {fileID: 7989497601864771036}
+  spawnableCollectiblesList:
+  - collectibleType: 0
+    spawnChances: 10
 --- !u!114 &6647153112830784159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,10 +203,10 @@ MonoBehaviour:
   m_SelfShadows: 1
   m_ApplyToSortingLayers: 197b308e00000000b7c0a176
   m_ShapePath:
-  - {x: -0.97163284, y: -0.25859725, z: 0}
-  - {x: -1.2547601, y: 0.1750645, z: 0}
-  - {x: 1.3083113, y: 0.16920546, z: 0}
-  - {x: 0.98135996, y: -0.27237347, z: 0}
-  m_ShapePathHash: 688706657
+  - {x: -3.130855, y: -0.9333541, z: 0}
+  - {x: -4.088739, y: 0.60241055, z: 0}
+  - {x: 4.1812353, y: 0.5677614, z: 0}
+  - {x: 2.8911076, y: -0.90342045, z: 0}
+  m_ShapePathHash: -812773778
   m_Mesh: {fileID: 0}
-  m_InstanceId: 53760
+  m_InstanceId: 47888
