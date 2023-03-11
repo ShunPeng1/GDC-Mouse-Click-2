@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("GameObject Properties")]
     private Rigidbody2D _rigidbody2D;

@@ -24,7 +24,7 @@ public class Trajectory : MonoBehaviour {
         var ghostObj = Instantiate(ResourceManager.Instance.ghostTrajectoryGameObject, pos, Quaternion.identity);
         SceneManager.MoveGameObjectToScene(ghostObj.gameObject, PlatformManager.Instance.GetSimulationScene());
         
-        ghostObj.GetComponent<TrajectoryGhostObject>().Init(velocity, true);
+        ghostObj.GetComponent<TrajectoryGhostObject>().Init(velocity);
 
         _lineRenderer.positionCount = _maxPhysicsFrameIterations;
 
