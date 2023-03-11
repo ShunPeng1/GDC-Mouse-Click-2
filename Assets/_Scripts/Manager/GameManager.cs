@@ -13,6 +13,9 @@ public class GameManager : PersistentSingleton<GameManager>
         GameOver,
     }
 
+    private GameState _currentGameState;
+
+    
     protected override void Awake()
     {
         base.Awake();
@@ -27,6 +30,7 @@ public class GameManager : PersistentSingleton<GameManager>
                 OnGameInitial();
                 break;
             case GameState.GamePlaying:
+                OnGamePlaying();
                 break;
             case GameState.GameOver:
                 OnGameOver();
@@ -34,6 +38,8 @@ public class GameManager : PersistentSingleton<GameManager>
             default:
                 throw new ArgumentOutOfRangeException(nameof(changeGameState), changeGameState, null);
         }
+
+        _currentGameState = changeGameState;
     }
     private void OnGameInitial()
     {

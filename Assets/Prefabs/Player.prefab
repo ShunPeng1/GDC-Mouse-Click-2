@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 4103347631612799719}
   - component: {fileID: 4103347631612799716}
   - component: {fileID: 876322760}
+  - component: {fileID: 1825639685772079305}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -303,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trajectory: {fileID: 48110079}
   launchParticles: {fileID: 0}
+  movingMap: {fileID: 0}
   soundJump: {fileID: 8300000, guid: 530795b186bb4394d8e367a5d4e350e2, type: 3}
   soundHitOnRock: {fileID: 8300000, guid: 985e5dd9fdd33b44b9a505469da858ef, type: 3}
   soundLandedOnGrass: {fileID: 8300000, guid: 3293c1470e565dc40a191dba0f610742, type: 3}
@@ -343,5 +345,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5bfafc2327b7749ae7901cfa66cfb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point: 0
-  life: 0
+  carrotScore: 0
+  lifeScore: 0
+--- !u!114 &1825639685772079305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4103347631612799706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 197b308e00000000b7c0a176
+  m_ShapePath:
+  - {x: -0.43864727, y: -1.0613565, z: 0}
+  - {x: -0.43864727, y: 0.8976288, z: 0}
+  - {x: 0.48542666, y: 0.9210186, z: 0}
+  - {x: 0.48542663, y: -1.0496616, z: 0}
+  m_ShapePathHash: 547055562
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -757668

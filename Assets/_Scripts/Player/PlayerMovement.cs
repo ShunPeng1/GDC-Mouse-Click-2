@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private ParticleSystem launchParticles;
+    [SerializeField] private MovingMap movingMap;
 
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         SoundManager.Instance.PlaySoundEffect(soundJump);
         _animator.SetTrigger(IsJumping);
         _spriteRenderer.flipX = backwardDirection.x < 0;
+        movingMap.StartMoving();
     }
 
     private void InitPush()
