@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SoundManager : Singleton<SoundManager>
 {
 
@@ -11,12 +12,14 @@ public class SoundManager : Singleton<SoundManager>
     
     void Start()
     {
+        worldAudioSource = GetComponent<AudioSource>();
+        
         int index = Random.Range(0, gameplayClips.Count);
         worldAudioSource.clip = gameplayClips[index];
         
     }
 
-    void OnGameOver()
+    public void OnGameOver()
     {
         worldAudioSource.clip = gameOverClip;
         worldAudioSource.loop = false;

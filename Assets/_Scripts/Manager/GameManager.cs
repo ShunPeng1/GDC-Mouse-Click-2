@@ -43,7 +43,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     private void OnGameOver()
     {
-        
+        SoundManager.Instance.OnGameOver();
     }
 
     private void OnGamePlaying()
