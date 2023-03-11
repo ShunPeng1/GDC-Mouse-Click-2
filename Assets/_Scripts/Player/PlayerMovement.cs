@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("GameObject Properties")]
     private Rigidbody2D _rigidbody2D;
@@ -12,8 +12,7 @@ public class Ball : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private ParticleSystem launchParticles;
-    
-    
+
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
     [SerializeField] AudioClip soundHitOnRock;
@@ -24,7 +23,6 @@ public class Ball : MonoBehaviour
     [SerializeField] private float pushForce;
     [SerializeField, Min(1)] private int maxPushEnergy = 1;
     [SerializeField] private float collideCheckDuration = 0.3f;
-    [SerializeField] private Transform movingMap;
     
     private Vector3 _initialPos;
     private bool _isPushing;
@@ -59,7 +57,7 @@ public class Ball : MonoBehaviour
         {
             Vector3 mousePosition = Input.mousePosition;
             Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
-            trajectory.SimulateTrajectory( transform.position,  backwardDirection* pushForce);
+            trajectory.SimulateTrajectory( backwardDirection * pushForce);
         }
     }
 
@@ -76,7 +74,7 @@ public class Ball : MonoBehaviour
         _isPushing = false;
         _currentPushEnergy--;
         
-        _audioSource.PlayOneShot(soundJump);
+        SoundManager.Instance.PlaySoundEffect(soundJump);
         _animator.SetTrigger(IsJumping);
         _spriteRenderer.flipX = backwardDirection.x < 0;
     }

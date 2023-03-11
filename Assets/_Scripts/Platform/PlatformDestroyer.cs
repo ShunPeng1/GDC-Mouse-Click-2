@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class PlatformDestroyer : MonoBehaviour
 {
-
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Hit "+ other.gameObject.name );
@@ -15,6 +13,12 @@ public class PlatformDestroyer : MonoBehaviour
         {
             PlatformManager.Instance.DestroyPlatform(other.gameObject);
         }
+
+        if (other.CompareTag($"Collectible"))
+        {
+            other.GetComponent<Collectible>().DestroyCollectible();
+        }
     }
+    
 
 }
