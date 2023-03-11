@@ -16,6 +16,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         int index = Random.Range(0, gameplayClips.Count);
         worldMusicSource.clip = gameplayClips[index];
+        worldMusicSource.Play();
     }
 
     public void OnGameOver()

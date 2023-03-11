@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         _isPushing = false;
         _currentPushEnergy--;
         
-        _audioSource.PlayOneShot(soundJump);
+        SoundManager.Instance.PlaySoundEffect(soundJump);
         _animator.SetTrigger(IsJumping);
         _spriteRenderer.flipX = backwardDirection.x < 0;
     }

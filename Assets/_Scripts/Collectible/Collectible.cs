@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider2D))]
 public abstract class Collectible : MonoBehaviour
 {
     protected virtual void OnTriggerEnter2D(Collider2D col)
