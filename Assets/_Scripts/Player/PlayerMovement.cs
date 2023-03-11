@@ -12,8 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private ParticleSystem launchParticles;
-    
-    
+
     [Header("Audio Clips")]
     [SerializeField] AudioClip soundJump;
     [SerializeField] AudioClip soundHitOnRock;
@@ -24,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float pushForce;
     [SerializeField, Min(1)] private int maxPushEnergy = 1;
     [SerializeField] private float collideCheckDuration = 0.3f;
-    [SerializeField] private Transform movingMap;
     
     private Vector3 _initialPos;
     private bool _isPushing;
@@ -59,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 mousePosition = Input.mousePosition;
             Vector3 backwardDirection =  (_initialPos - mousePosition).normalized;
-            trajectory.SimulateTrajectory( transform.position,  backwardDirection* pushForce);
+            trajectory.SimulateTrajectory( backwardDirection * pushForce);
         }
     }
 

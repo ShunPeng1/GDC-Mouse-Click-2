@@ -8,20 +8,16 @@ public class Trajectory : MonoBehaviour {
     
     private LineRenderer _lineRenderer;
     [SerializeField] private int _maxPhysicsFrameIterations = 100;
-    [SerializeField] private Transform _obstaclesParent;
+    
     
     private void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
     }
-
     
-    private void Update() {
-        
-    }
 
-    public void SimulateTrajectory(Vector3 pos, Vector3 velocity) {
-        var ghostObj = Instantiate(ResourceManager.Instance.ghostTrajectoryGameObject, pos, Quaternion.identity);
+    public void SimulateTrajectory(Vector3 velocity) {
+        var ghostObj = Instantiate(ResourceManager.Instance.ghostTrajectoryGameObject, transform.position, Quaternion.identity);
         PlatformManager.Instance.MoveObjectToSimulateScene(ghostObj);
         
         ghostObj.GetComponent<TrajectoryGhostObject>().Init(velocity);
