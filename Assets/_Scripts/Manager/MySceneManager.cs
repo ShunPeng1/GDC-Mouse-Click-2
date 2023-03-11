@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class SceneManager : Singleton<SceneManager>
+public class MySceneManager : Singleton<MySceneManager>
 {
     public void RestartScene(){
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
